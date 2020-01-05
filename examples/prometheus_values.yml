@@ -1,0 +1,75 @@
+# This configuration file is tested with Prometheus stable chart
+# (https://github.com/helm/charts/tree/master/stable/prometheus)
+# version 9.7.2.
+# The value below will deploy Prometheus server only (all other
+# components disabled) and adds Thanos Downloader as an extra
+# initContainer to fetch the data for the server.
+# Make sure to adjust the initContainer args --interval.start
+# and --interval.end to the desired time range.
+
+server:
+  extraInitContainers:
+    - name: thanos-downloader
+      image: "anasaso/thanos_downloader:latest"
+      imagePullPolicy: IfNotPresent
+      args:
+      - --config.path=/thanos-config.yaml
+      - --data.path=/data
+      # Adjust start & end to the desired values
+      - --interval.start=1577431609
+      - --interval.end=1577435208
+      volumeMounts:
+      - name: thanos-config
+        mountPath: /thanos-config.yaml
+        subPath: bucket.yaml
+        readOnly: true
+      # Mount Prometheus data volume into Thanos Downloader
+      - mountPath: /data
+        name: storage-volume
+  # Mount Thanos Config
+  extraSecretMounts:
+    - name: thanos-config
+      mountPath: /thanos-config.yaml
+      secretName: thanos-config
+      readOnly: true
+
+  persistentVolume:
+    # Adjust this value according to the expected downloaded data size
+    size: 8Gi
+
+
+# The config bellow disables all the chart components that are not needed
+rbac:
+  create: false
+
+serviceAccounts:
+  alertmanager:
+    create: false
+  kubeStateMetrics:
+    create: false
+  nodeExporter:
+    create: false
+  pushgateway:
+    create: false
+  server:
+    create: false
+
+alertmanager:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+pushgateway:
+  enabled: false
+
+alertmanagerFiles:
+  alertmanager.yml: {}
+
+serverFiles:
+  prometheus.yml:
+    rule_files:
+    scrape_configs: []
