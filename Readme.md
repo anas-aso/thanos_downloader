@@ -1,3 +1,8 @@
+[![Release](https://img.shields.io/github/release/anas-aso/thanos_downloader.svg?style=flat)](https://github.com/anas-aso/thanos_downloader/releases/latest)
+[![Build Status](https://github.com/anas-aso/thanos_downloader/workflows/.github/workflows/test.yml/badge.svg)](https://github.com/anas-aso/thanos_downloader/actions)
+[![codecov](https://codecov.io/gh/anas-aso/thanos_downloader/branch/master/graph/badge.svg)](https://codecov.io/gh/anas-aso/thanos_downloader)
+[![Go Report Card](https://goreportcard.com/badge/github.com/anas-aso/thanos_downloader)](https://goreportcard.com/report/github.com/anas-aso/thanos_downloader)
+
 # Thanos Downloader
 A helper application to use Prometheus TSDB data blocks uploaded by [Thanos Sidecar](https://github.com/thanos-io/thanos/blob/master/docs/components/sidecar.md) component with a vanilla Prometheus setup.
 
