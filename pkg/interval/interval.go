@@ -4,7 +4,7 @@ import "fmt"
 
 // TimeInterval represent a time interval in millis
 type TimeInterval struct {
-	// begining of the time interval
+	// beginning of the time interval
 	StartTime int64
 	// end of the time interval
 	EndTime int64
