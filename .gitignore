@@ -9,3 +9,6 @@
 
 # Unignore Dockerfile
 !Dockerfile
+
+# code coverage reports
+**/coverage.txt
