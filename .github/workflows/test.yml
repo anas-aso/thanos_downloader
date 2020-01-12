@@ -21,24 +21,4 @@ jobs:
     - name: Download dependencies
       run: go mod download
     - name: Test
-      run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
-    - name: Persist code coverage result
-      uses: actions/upload-artifact@v1
-      with:
-        name: artifacts
-        path: coverage.txt
-  codecov:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Load code coverage result
-      uses: actions/download-artifact@v1
-      with:
-        name: artifacts
-    - name: Code Coverage
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        curl -s https://codecov.io/bash > codecov
-        chmod +x codecov
-        timeout --signal=KILL 10s ./codecov -X fix -s artifacts -Z
+      run: go test -race -covermode=atomic ./...
