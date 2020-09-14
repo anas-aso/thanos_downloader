@@ -8,3 +8,6 @@ require (
 	github.com/thanos-io/thanos v0.15.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
+
+// requried to avoid issues due to "k8s.io/client-go@v12.0.0+incompatible"
+replace k8s.io/client-go => k8s.io/client-go v0.19.1
